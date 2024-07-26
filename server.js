@@ -68,6 +68,16 @@ app.get('/menu', (req, res) => {
   res.render(path.join(__dirname, 'views', 'menu.ejs'));
 });
 
+app.get('/menu/:category', (req, res) => {
+  const category = req.params.category;
+  const categoryMenu = RESTAURANT.menu.filter(item => item.category === category);
+  res.locals.categoryMenu = category;
+  res.render(path.join(__dirname, 'views', 'category.ejs'), {
+    categoryMenu: categoryMenu,
+    categoryName: category,
+  });
+});
+
 app.listen(3000, () => {
   console.log('Server running on port 3000')
 });

@@ -70,11 +70,11 @@ app.get('/menu', (req, res) => {
 
 app.get('/menu/:category', (req, res) => {
   const category = req.params.category;
-  const categoryMenu = RESTAURANT.menu.filter(item => item.category === category);
-  res.locals.categoryMenu = category;
+  const menuItems = RESTAURANT.menu.filter(item => item.category === category);
+  const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+  res.locals.menuItems = menuItems;
+  res.locals.categoryName = categoryName;
   res.render(path.join(__dirname, 'views', 'category.ejs'), {
-    categoryMenu: categoryMenu,
-    categoryName: category,
   });
 });
 
